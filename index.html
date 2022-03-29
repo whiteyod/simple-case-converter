@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div class="title">Case Converter</div>
+    <label for="textarea"></label>
+    <textarea id="textarea"></textarea>
+    <button id="upper-case">Upper Case</button>
+    <script>
+        document.getElementById("upper-case").addEventListener("click", function()
+        {
+            let text = document.querySelector('textarea').value.toUpperCase().split(' ');
+            document.querySelector('textarea').value = text.join(' ');
+        });
+    </script>
+    <button id="lower-case">Lower Case</button>
+    <script>
+        document.getElementById("lower-case").addEventListener("click", function()
+        {
+            let text = document.querySelector('textarea').value.toLowerCase().split(' ');
+            document.querySelector('textarea').value = text.join(' ');
+        });
+    </script>
+    <button id="proper-case">Proper Case</button>
+    <script>
+       document.getElementById("proper-case").addEventListener("click", function()
+       {
+           let text = document.querySelector('textarea').value;
+           document.querySelector('textarea').value = text.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ');
+       });
+    </script>
+    <button id="sentence-case">Sentence Case</button>
+    <script>
+        document.getElementById('sentence-case').addEventListener('click', function()
+        {
+            let text = document.querySelector('textarea').value;
+            document.querySelector('textarea').value = text.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, function (c){
+                return c.toUpperCase()
+        })
+        });
+    </script>
+    <button id="save-text-file">Save Text File</button>
+    <script>
+        document.getElementById("save-text-file").addEventListener("click", function() {
+            let text = document.getElementById("textarea").value;
+            let filename = "text.txt"
+            download(filename ,text);
+        }, false);
+
+        function download(filename, text) {
+            let element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        }
+        download("text.txt", text);
+    </script>
+</body>
+</html>
