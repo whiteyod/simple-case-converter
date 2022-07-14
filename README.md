@@ -1,2 +1,2 @@
 # studying
-This is my fist studying project, simple case converter.
+An application that allows you to change the case of text.
